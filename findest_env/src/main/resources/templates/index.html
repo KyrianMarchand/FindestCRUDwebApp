@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+	<meta charset="UTF-8">
+	<title>Study Management</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+	<div class="container mt-5">
+		<h2>Study Management</h2>
+		<div>
+			<a href="/addStudy" class="btn btn-primary mb-3">Add Study</a>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">DELETE</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						Are you sure to want to delete this study ?
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+						<button type="button" class="btn btn-danger" id="deleteConfirmBtn" data-id="">Yes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<form th:action="@{/deleteSelected}" method="post">
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th></th>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Date</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="study : ${Studieslist}">
+						<td><input type="checkbox" th:value="${study.id}" name="selectedIds" /></td>
+						<td th:text="${study.id}"></td>
+						<td th:text="${study.name}"></td>
+						<td th:text="${study.creationDate}"></td>
+						<td>
+							<a th:href="@{/editStudy/{id}(id=${study.id})}" class="btn btn-success">Edit</a>
+							<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal"
+								th:attr="data-id=${study.id}">Delete</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteAllModal">Delete
+				All</button>
+
+			<!-- Confirm Delete All Modal -->
+			<div class="modal fade" id="confirmDeleteAllModal" tabindex="-1" role="dialog"
+				aria-labelledby="deleteAllModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="deleteAllModalLabel">Confirm Delete</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							Are you sure you want to delete the selected studies?
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+							<button type="submit" class="btn btn-danger">Yes</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="/js/main.js"></script>
+</body>
+
+</html>
