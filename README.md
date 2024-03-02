@@ -12,10 +12,11 @@ To run the application, please follow these steps:
 
 1. Download the `findest_env` file.
 2. Open a terminal and navigate to the file directory: `cd ~/findest_env`.
-3. Initialize Docker Compose with the command: `docker-compose up -d`.
-4. Launch the Maven application: `mvn spring-boot:run`.
-5. You can view the application at: http://127.0.0.1:8080/.
-6. Additionally, you can manage the database at: http://127.0.0.1:5051/.
+3. Give permission to database creation `chmod +x Data/create-multiple-postgresql-databases.sh`.
+4. Initialize Docker Compose with the command: `docker-compose up -d`. Wait ≈30s-1min then :
+5. Launch the Maven application: `mvn spring-boot:run`.
+6. You can view the application at: http://127.0.0.1:8080/.
+7. Additionally, you can manage the database at: http://127.0.0.1:5051/.
 
     - **Login:** pguser@admin.com
     - **Password:** pgpwd
